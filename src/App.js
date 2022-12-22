@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -22,31 +22,24 @@ function App() {
 
   return (
     <div>
+      <BrowserRouter>
+    <Route>
       <CartContext.Provider value={{ cart, setCart, qnt, setQnt }}>
-        <Router>
-          <CssBaseline>
-            <Navbar />
-            <Switch>
-              <Route exact path="/">
-                <Home greeting={greeting} />
-              </Route>
-              <Route path="/form">
-                <Form />
-              </Route>
-              <Route path="/item/:id">
-                <ItemDetailPage />
-              </Route>
-              <Route path="/categories/:categoryId">
-                <Categories />
-              </Route>
-              <Route path="/cart">
-                <Cart />
-              </Route>
-            </Switch>
-            <Footer />
-          </CssBaseline>
-        </Router>
+      <Route path='/' element={<ItemListContainer />} />
+      <Route path='/CssBaseline' element={<CssBaseline />} />
+      <Route path='/ItemDetailPage/:id' element={<ItemDetailPage />} />
+      <Route path='/item/:id' element={<ItemDetailContainer/>} />
+      <Route path='/cart' element={<Cart/>} />
+      <Route path='/Home' element={<Home/>} />
+      <Route path='/Form' element={<Form/>} />
+      <Route path='/Categories' element={<Categories/>} />
+      <Route path='/CartContext' element={<CartContext/>} />
+      <Route path='/Footer' element={<Footer/>} />
+      <Route path='/Navbar' element={<Navbar/>} />
       </CartContext.Provider>
+    </Route>
+    
+</BrowserRouter>
     </div>
   );
 }
